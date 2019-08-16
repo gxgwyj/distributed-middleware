@@ -40,6 +40,7 @@ public class TransactionProducer {
 
         // 设置发送者的线程池
         producer.setExecutorService(executorService);
+        // 注册listener
         producer.setTransactionListener(listener);
         producer.start();
 
@@ -48,6 +49,7 @@ public class TransactionProducer {
                 new Message("TransactionProducerTopic", "TransactionProducerTag",
                         "payMsg".getBytes(RemotingHelper.DEFAULT_CHARSET));
 
+        // 发送事务性消息
         producer.sendMessageInTransaction(msg, null);
     }
 }
