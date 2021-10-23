@@ -16,8 +16,7 @@ import java.text.MessageFormat;
  */
 public class ZookeeperClient {
 
-//    private static final String HOST_PORT = "192.168.202.128:2181";  //公司的zookeeper地址
-    public static final String HOST_PORT = "192.168.1.120:2181";      //家里的zookeeper地址
+    public static final String CONNECT_INFO = "192.168.202.128:2181,192.168.202.129:2181,192.168.202.130:2181";      //家里的zookeeper地址
     public static final int TIME_OUT = 5000;
     public static String CHAR_SET = "UTF-8";
     private ZooKeeper zooKeeper;
@@ -32,7 +31,7 @@ public class ZookeeperClient {
 
     private void zookeeperInit(){
         try {
-            zooKeeper = new ZooKeeper(HOST_PORT,TIME_OUT,zookeeperWatcher);
+            zooKeeper = new ZooKeeper(CONNECT_INFO,TIME_OUT,zookeeperWatcher);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -44,6 +43,14 @@ public class ZookeeperClient {
 
     public static ZookeeperClient getZkInstance(){
         return ZookeeperClientHolder.zookeeperClient;
+    }
+
+    public ZooKeeper getZooKeeper() {
+        return zooKeeper;
+    }
+
+    public void setZooKeeper(ZooKeeper zooKeeper) {
+        this.zooKeeper = zooKeeper;
     }
 
     /**

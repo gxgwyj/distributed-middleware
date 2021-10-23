@@ -76,11 +76,11 @@ public class ZookeeperClientTest {
     @Test
     public void authSample() throws Exception{
         String path = "/zk_test";
-        ZooKeeper zooKeeper = new ZooKeeper(ZookeeperClient.HOST_PORT,ZookeeperClient.TIME_OUT,null);
+        ZooKeeper zooKeeper = new ZooKeeper(ZookeeperClient.CONNECT_INFO,ZookeeperClient.TIME_OUT,null);
         zooKeeper.addAuthInfo("digest","foo:true".getBytes("utf-8"));
         zooKeeper.create(path,"init".getBytes(), ZooDefs.Ids.CREATOR_ALL_ACL, CreateMode.EPHEMERAL);
 
-        ZooKeeper zooKeeper1 = new ZooKeeper(ZookeeperClient.HOST_PORT,ZookeeperClient.TIME_OUT,null);
+        ZooKeeper zooKeeper1 = new ZooKeeper(ZookeeperClient.CONNECT_INFO,ZookeeperClient.TIME_OUT,null);
         zooKeeper1.getData(path,false,null);
 
 
